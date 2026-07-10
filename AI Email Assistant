@@ -1,0 +1,147 @@
+{
+  "name": "AI Email Assistant",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 8,
+              "triggerAtMinute": 30
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "2009230b-a40e-4898-b438-e408d2c2f863",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "authorization",
+              "value": Bearer {{$env.GROQ_API_KEY}}
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"llama-3.3-70b-versatile\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a concise email assistant. Extract only key info. Be short.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Read this email and return ONLY this exact format. Max 3 lines per section. No extra text:\\n\\n📧 Email Summary\\n📝 Summary:\\n1 sentence, max 15 words\\n✅ Action Items:\\n- bullet 1, max 6 words\\n- bullet 2, max 6 words\\n- bullet 3, max 6 words\\n⏰ Deadline:\\nDate/time or None\\n🔥 Priority:\\nHigh/Medium/Low\\nRules: Priority=High if urgent/ASAP/today. Medium if this week. Low if newsletter.\\n\\nEmail: {{ $json.snippet }}\"\n    }\n  ],\n  \"temperature\": 0.3,\n  \"max_tokens\": 200\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        432,
+        0
+      ],
+      "id": "36a12aba-2cca-4032-a60c-c5ff4d9e3e34",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "sendTo": your-email@example.com
+        "subject": " AI email summary",
+        "message": "={{ $json.choices[0].message.content.replace(/\\*/g, '•') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        656,
+        0
+      ],
+      "id": "9c370c9f-e20c-44d3-9aa7-af60e16416af",
+      "name": "Send a message",
+      "webhookId": "687adb3d-08a4-4acd-afb2-adecac31bcc6",
+      
+        
+      
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "limit": 1,
+        "filters": {
+          "q": "is:unread "
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "393409cb-5d32-4008-9a16-067dcc531c04",
+      "name": "Get many messages",
+      "webhookId": "438ecbea-698b-4464-b0f8-bae7ddc9c2de",
+     
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get many messages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many messages": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed",
+    "timezone": "Asia/Karachi",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "versionId": "c471b938-fdc3-4b7d-a2f9-29d584347304",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "fa614eb2e11ab21ef260bfedd2b140c44ae8b7cf9c57865a4d3ecae0020e02e2"
+  },
+  "id": "tWe0slXiiDicbLh0",
+  "tags": []
+}
