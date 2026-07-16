@@ -22,10 +22,10 @@ This n8n workflow automatically:
  ## Screenshots
 
 ### n8n Workflow
-![Workflow](Screenshots/Screenshot%20(41).png)
+![Workflow](screenshots/Screenshot%20(41).png)
 
 ### Email Summary Output
-![Email Summary](Screenshots/Screenshot%20(42).png)
+![Email Summary](screenshots/Screenshot%20(42).png)
 
 ## Project Structure
 
