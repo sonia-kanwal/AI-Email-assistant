@@ -21,11 +21,14 @@ This n8n workflow automatically:
 
 ## Screenshots
 
-### n8n Workflow
-![Workflow](Screenshots/Screenshot(41).png)
+### 1. n8n Workflow - Part 1
+![Workflow Part 1](Screenshots/Screenshot(41).png)
 
-### Email Summary Output
-![Email Summary](Screenshots/Screenshot(42).png)
+### 2. n8n Workflow - Part 2
+![Workflow Part 2](Screenshots/Screenshot(42).png)
+
+### 3. AI Email Summary Output - WhatsApp
+![Email Output](Screenshots/whatsapp%20Image%202026-07-11%20at....jpeg)
 
 ## Project Structure
 
