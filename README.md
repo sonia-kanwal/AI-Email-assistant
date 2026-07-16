@@ -19,5 +19,19 @@ This n8n workflow automatically:
 3. Add your own Groq API key.
 4. Run the workflow.
 
+ ## Screenshots
+
+### n8n Workflow
+![Workflow](Screenshots/Screenshot%20(41).png)
+
+### Email Summary Output
+![Email Summary](Screenshots/Screenshot%20(42).png)
+
+## Project Structure
+
+- `README.md` – Project documentation
+- `ai-email-assistant.json` – n8n workflow
+- `Screenshots/` – Workflow and output images
+
 ## Author
 Sonia Kanwal
