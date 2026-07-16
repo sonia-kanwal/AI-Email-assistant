@@ -19,13 +19,13 @@ This n8n workflow automatically:
 3. Add your own Groq API key.
 4. Run the workflow.
 
- ## Screenshots
+## Screenshots
 
 ### n8n Workflow
-![Workflow](screenshots/Screenshot%20(41).png)
+![Workflow](Screenshots/Screenshot(41).png)
 
 ### Email Summary Output
-![Email Summary](screenshots/Screenshot%20(42).png)
+![Email Summary](Screenshots/Screenshot(42).png)
 
 ## Project Structure
 
