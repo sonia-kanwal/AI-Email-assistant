@@ -28,7 +28,8 @@ This n8n workflow automatically:
 ![Workflow Part 2](Screenshots/Screenshot(42).png)
 
 ### 3. AI Email Summary Output - WhatsApp
-![Email Output](whatsapp%20Image%202026-07-11%20at....jpeg)
+![Email Output](Output.png)
+
 ## Project Structure
 
 - `README.md` – Project documentation
